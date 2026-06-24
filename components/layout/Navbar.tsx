@@ -110,19 +110,34 @@ export function Navbar() {
               </a>
             </div>
 
-            {/* Mobile Menu Toggle */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2"
-              id="mobile-menu-toggle"
-              aria-label="Toggle menu"
-            >
-              {isMobileMenuOpen ? (
-                <X className={`w-6 h-6 ${isScrolled ? 'text-ivory' : 'text-white'}`} />
-              ) : (
-                <Menu className={`w-6 h-6 ${isScrolled ? 'text-ivory' : 'text-white'}`} />
-              )}
-            </button>
+            {/* Mobile CTA + Menu Toggle */}
+            <div className="flex lg:hidden items-center gap-3">
+              <a
+                href={contactConfig.whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                id="mobile-header-cta"
+                className={`inline-flex items-center px-3.5 py-1.5 border text-[10px] tracking-widest uppercase transition-all duration-300 ${
+                  isScrolled
+                    ? 'border-champagne/60 text-champagne hover:border-champagne hover:bg-champagne/10'
+                    : 'border-ivory/30 text-ivory/80 hover:border-ivory/60 hover:bg-ivory/10'
+                }`}
+              >
+                Agendar Visita
+              </a>
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="p-2"
+                id="mobile-menu-toggle"
+                aria-label="Toggle menu"
+              >
+                {isMobileMenuOpen ? (
+                  <X className={`w-6 h-6 ${isScrolled ? 'text-ivory' : 'text-white'}`} />
+                ) : (
+                  <Menu className={`w-6 h-6 ${isScrolled ? 'text-ivory' : 'text-white'}`} />
+                )}
+              </button>
+            </div>
           </div>
         </nav>
       </motion.header>
