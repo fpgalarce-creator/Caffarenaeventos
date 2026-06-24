@@ -7,11 +7,11 @@ export const siteConfig = {
 
 export const contactConfig = {
   whatsapp: {
-    number: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '56912345678',
+    number: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '56995482280',
     message: 'Hola, me gustaría coordinar una visita para conocer Caffarena Eventos.',
   },
   get whatsappLink() {
-    return `https://wa.me/${this.whatsapp.number}?text=${encodeURIComponent(this.whatsapp.message)}`;
+    return `https://wa.me/56995482280?text=${encodeURIComponent(this.whatsapp.message)}`;
   },
   social: {
     instagram: '#',

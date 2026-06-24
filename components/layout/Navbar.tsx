@@ -81,15 +81,15 @@ export function Navbar() {
                     pathname === link.href
                       ? 'text-champagne'
                       : isScrolled
-                      ? 'text-ivory/70 hover:text-champagne'
-                      : 'text-white/70 hover:text-white'
+                      ? 'text-ivory/50 hover:text-ivory'
+                      : 'text-white/50 hover:text-white'
                   }`}
                 >
                   {link.label}
                   {pathname === link.href && (
                     <motion.div
                       layoutId="navbar-indicator"
-                      className="absolute -bottom-1 left-0 right-0 h-px bg-champagne"
+                      className="absolute -bottom-1 left-0 right-0 h-[1.5px] bg-champagne"
                       transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                     />
                   )}
@@ -104,7 +104,7 @@ export function Navbar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 id="navbar-cta"
-                className="inline-flex items-center gap-2 px-5 py-2.5 border border-champagne text-champagne text-xs tracking-widest uppercase hover:bg-champagne hover:text-graphite transition-all duration-300"
+                className="inline-flex items-center gap-2 px-5 py-2.5 border border-champagne/70 text-champagne text-xs tracking-widest uppercase hover:border-champagne hover:bg-champagne/10 transition-all duration-300"
               >
                 Agendar Visita
               </a>
@@ -168,7 +168,7 @@ export function Navbar() {
                     target="_blank"
                   rel="noopener noreferrer"
                   id="mobile-cta"
-                  className="mt-4 inline-flex items-center gap-2 px-8 py-3 border border-champagne text-champagne text-sm tracking-widest uppercase hover:bg-champagne hover:text-graphite transition-all duration-300"
+                  className="mt-4 inline-flex items-center gap-2 px-8 py-3 border border-champagne/70 text-champagne text-sm tracking-widest uppercase hover:border-champagne hover:bg-champagne/10 transition-all duration-300"
                 >
                   Agendar Visita
                 </a>
