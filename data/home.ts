@@ -129,6 +129,7 @@ export const homeCTAFinalData = {
   titlePart1: "Tu celebración extraordinaria",
   titlePart2: "comienza aquí",
   description: "Escríbenos hoy y da el primer paso hacia el evento que siempre soñaste. Nuestro equipo está listo para asesorarte y mostrarte cada rincón de nuestra hacienda.",
+  video: "/images/video2.mp4",
   backgroundImage: "/images/herocierre.jpg",
   buttonText: "Contáctanos por WhatsApp"
 };

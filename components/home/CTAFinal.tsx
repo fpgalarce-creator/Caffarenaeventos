@@ -1,24 +1,40 @@
 'use client';
 
-import Image from 'next/image';
+import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { CTAButton } from '@/components/shared/CTAButton';
 import { AnimatedSection } from '@/components/shared/AnimatedSection';
 import { homeCTAFinalData } from '@/data';
 
 export function CTAFinal() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.defaultMuted = true;
+      videoRef.current.muted = true;
+      videoRef.current.play().catch(() => {
+        // Autoplay may be deferred or blocked by browser policies
+      });
+    }
+  }, []);
+
   return (
     <section className="relative py-32 lg:py-48 overflow-hidden" id="cta-final">
-      {/* Background */}
-      <div className="absolute inset-0">
-        <Image
-          src={homeCTAFinalData.backgroundImage}
-          alt="Hacienda Caffarena Eventos"
-          fill
-          className="object-cover"
-          sizes="100vw"
-        />
-        <div className="gradient-overlay absolute inset-0" />
+      {/* Background Video */}
+      <div className="absolute inset-0 z-0">
+        <video
+          ref={videoRef}
+          autoPlay
+          loop
+          muted
+          playsInline
+          poster={homeCTAFinalData.backgroundImage}
+          className="w-full h-full object-cover select-none pointer-events-none"
+        >
+          <source src={homeCTAFinalData.video || "/images/video2.mp4"} type="video/mp4" />
+        </video>
+        <div className="gradient-overlay absolute inset-0 bg-graphite/40" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
