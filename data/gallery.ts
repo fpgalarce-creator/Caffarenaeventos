@@ -1,12 +1,16 @@
 export const galleryImages = [
+  { src: '/images/galeria1.jpg', alt: 'Salón principal y banquetería con vista panorámica', category: 'venue', span: 2 },
+  { src: '/images/galeria2.jpg', alt: 'Montaje de ceremonia en carpa decorada', category: 'matrimonios', span: 1 },
+  { src: '/images/galeria3.jpg', alt: 'Servicio de cóctel y bocadillos', category: 'coctel', span: 1 },
+  { src: '/images/galeria4.jpg', alt: 'Coctelería fina y canapés de bienvenida', category: 'coctel', span: 1 },
+  { src: '/images/galeria5.jpg', alt: 'Degustación y cóctel para invitados', category: 'coctel', span: 1 },
+  { src: '/images/galeria6.jpg', alt: 'Mesa de ceremonia y arreglos florales', category: 'matrimonios', span: 1 },
   { src: '/images/hero-venue.png', alt: 'Vista del recinto al atardecer', category: 'venue', span: 1 },
-  { src: '/images/wedding-ceremony.png', alt: 'Ceremonia de matrimonio', category: 'matrimonios', span: 1 },
+  { src: '/images/wedding-ceremony.png', alt: 'Ceremonia de matrimonio al aire libre', category: 'matrimonios', span: 1 },
   { src: '/images/graduation-event.png', alt: 'Celebración de graduación', category: 'graduaciones', span: 1 },
   { src: '/images/corporate-event.png', alt: 'Evento corporativo', category: 'corporativos', span: 1 },
   { src: '/images/gallery-nighttime.png', alt: 'Ambiente nocturno con iluminación', category: 'venue', span: 1 },
   { src: '/images/venue-panoramic.png', alt: 'Vista panorámica del recinto', category: 'venue', span: 1 },
-  { src: '/images/table-decor.png', alt: 'Detalles de mesa', category: 'venue', span: 2 },
-  { src: '/images/couple-sunset.png', alt: 'Atardecer', category: 'venue', span: 1 },
 ];
 
 export const homeGalleryData = {

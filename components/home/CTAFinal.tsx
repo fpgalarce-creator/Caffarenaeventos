@@ -13,7 +13,7 @@ export function CTAFinal() {
       <div className="absolute inset-0">
         <Image
           src={homeCTAFinalData.backgroundImage}
-          alt="Ambiente nocturno en Caffarena Eventos"
+          alt="Hacienda Caffarena Eventos"
           fill
           className="object-cover"
           sizes="100vw"
