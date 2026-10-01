@@ -25,9 +25,8 @@ export const contactConfig = {
 
 export const navLinks = [
   { href: '/', label: 'Inicio' },
+  { href: '/#servicios', label: 'Servicios' },
   { href: '/matrimonios', label: 'Matrimonios' },
-  { href: '/graduaciones', label: 'Graduaciones' },
-  { href: '/eventos-corporativos', label: 'Corporativos' },
   { href: '/galeria', label: 'Galería' },
   { href: '/contacto', label: 'Contacto' },
 ] as const;

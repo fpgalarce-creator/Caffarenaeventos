@@ -6,12 +6,6 @@ export const eventsList = [
     href: '/matrimonios',
   },
   {
-    title: 'Graduaciones',
-    description: 'Un espacio elegante y memorable para honrar los logros académicos de una nueva generación de profesionales.',
-    image: '/images/graduation-event.png',
-    href: '/graduaciones',
-  },
-  {
     title: 'Eventos Corporativos',
     description: 'Impresiona a tus colaboradores y clientes con un evento corporativo en un entorno sofisticado rodeado de naturaleza.',
     image: '/images/corporate-event.png',

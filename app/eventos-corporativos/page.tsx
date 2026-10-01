@@ -12,9 +12,9 @@ export const metadata: Metadata = {
 
 export default function CorporativosPage() {
   return (
-    <div className="pt-20">
+    <div>
       {/* Hero */}
-      <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center">
+      <section className="relative h-[65vh] min-h-[520px] flex items-center justify-center pt-20">
         <div className="absolute inset-0">
           <Image
             src={corporativosPageData.hero.image}

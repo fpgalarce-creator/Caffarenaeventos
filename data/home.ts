@@ -5,7 +5,7 @@ export const homeHeroData = {
   titlePart1: "Celebraciones extraordinarias",
   titlePart2: "en un entorno inolvidable",
   description: "Una hacienda contemporánea rodeada de naturaleza, donde cada detalle está pensado para crear recuerdos que perduren en el tiempo.",
-  backgroundImage: "/images/hero-venue.png",
+  backgroundImage: "/images/hero1.jpg",
   ctaText: "Agendar Visita Privada",
   scrollText: "Descubre más"
 };
@@ -14,7 +14,7 @@ export const homeExperienceData = {
   subtitle: "La Experiencia",
   title: "Donde la naturaleza se encuentra con la elegancia",
   description: "Caffarena Eventos es más que un lugar: es una experiencia sensorial completa. Nuestra hacienda contemporánea, ubicada en el corazón de la Región de O'Higgins, ofrece amplios espacios exteriores donde cada celebración se transforma en un recuerdo inolvidable bajo cielos abiertos y atardeceres espectaculares.",
-  image: "/images/venue-panoramic.png",
+  image: "/images/hero-venue.png",
   highlights: [
     {
       icon: MapPin,

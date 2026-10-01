@@ -8,7 +8,7 @@ import { homeEventTypesData } from '@/data';
 
 export function EventTypes() {
   return (
-    <section className="py-24 lg:py-32 bg-ivory" id="event-types">
+    <section className="py-24 lg:py-32 bg-ivory scroll-mt-20" id="servicios">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <AnimatedSection>
           <SectionHeading
@@ -18,7 +18,7 @@ export function EventTypes() {
           />
         </AnimatedSection>
 
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto gap-8 lg:gap-12">
           {homeEventTypesData.events.map((event, index) => (
             <AnimatedSection key={event.title} delay={index * 0.15}>
               <Link href={event.href} className="group block" id={`event-card-${event.href.replace('/', '')}`}>

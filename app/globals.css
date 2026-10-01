@@ -178,3 +178,88 @@ h1, h2, h3, h4, h5, h6 {
 .image-hover:hover img {
   transform: scale(1.05);
 }
+
+/* Hero slideshow Ken Burns effect */
+@keyframes hero-ken-burns {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.08);
+  }
+}
+
+.hero-slide-active img {
+  animation: hero-ken-burns 7s ease-out forwards;
+}
+
+/* Responsive Hero Image Framing */
+.hero-img-venue {
+  object-position: center 42%;
+}
+@media (min-width: 640px) {
+  .hero-img-venue {
+    object-position: center 40%;
+  }
+}
+@media (min-width: 1024px) {
+  .hero-img-venue {
+    object-position: center 38%;
+  }
+}
+
+.hero-img-1 {
+  object-position: center 35%;
+}
+@media (min-width: 640px) {
+  .hero-img-1 {
+    object-position: center 30%;
+  }
+}
+@media (min-width: 1024px) {
+  .hero-img-1 {
+    object-position: center 25%;
+  }
+}
+
+.hero-img-2 {
+  object-position: center 50%;
+}
+@media (min-width: 640px) {
+  .hero-img-2 {
+    object-position: center 40%;
+  }
+}
+@media (min-width: 1024px) {
+  .hero-img-2 {
+    object-position: center 32%;
+  }
+}
+
+.hero-img-3 {
+  object-position: center 58%;
+}
+@media (min-width: 640px) {
+  .hero-img-3 {
+    object-position: center 50%;
+  }
+}
+@media (min-width: 1024px) {
+  .hero-img-3 {
+    object-position: center 45%;
+  }
+}
+
+.hero-img-4 {
+  object-position: center 38%;
+}
+@media (min-width: 640px) {
+  .hero-img-4 {
+    object-position: center 35%;
+  }
+}
+@media (min-width: 1024px) {
+  .hero-img-4 {
+    object-position: center 30%;
+  }
+}
