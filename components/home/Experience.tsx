@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { Volume2, VolumeX, Play, Pause } from 'lucide-react';
+import { Volume2, VolumeX, Play } from 'lucide-react';
 import { AnimatedSection } from '@/components/shared/AnimatedSection';
 import { homeExperienceData } from '@/data';
 
@@ -9,10 +9,29 @@ export function Experience() {
   const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const isExplicitlyMuted = useRef<boolean>(false);
+  const isUserUnmutedOnMobile = useRef<boolean>(false);
 
   const [isInView, setIsInView] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+  const [isMobile, setIsMobile] = useState(true);
+
+  // Detect mobile screen width (celular / tablet pequeña < 768px)
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      if (mobile && !isUserUnmutedOnMobile.current) {
+        setIsMuted(true);
+        if (videoRef.current) {
+          videoRef.current.muted = true;
+        }
+      }
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Monitor when the section is in view to play/pause video and audio
   useEffect(() => {
@@ -42,48 +61,65 @@ export function Experience() {
     };
   }, []);
 
-  // Manage video and audio play/pause based on section visibility
+  // Manage video and audio play/pause based on section visibility and device type
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
     if (isInView) {
-      // User is currently in the section: start playing with audio if permitted
-      if (!isExplicitlyMuted.current) {
-        video.muted = false;
-        const playPromise = video.play();
-        if (playPromise !== undefined) {
-          playPromise
-            .then(() => {
-              setIsPlaying(true);
-              setIsMuted(false);
-            })
-            .catch(() => {
-              // Browser policy restricted unmuted autoplay before user interaction
-              video.muted = true;
-              setIsMuted(true);
-              video
-                .play()
-                .then(() => setIsPlaying(true))
-                .catch(() => setIsPlaying(false));
-            });
+      if (isMobile) {
+        // En celular: siempre inicia en MUTE por defecto, a menos que el usuario haya hecho clic en el botón de volumen
+        if (!isUserUnmutedOnMobile.current) {
+          video.muted = true;
+          setIsMuted(true);
+        } else {
+          video.muted = false;
+          setIsMuted(false);
         }
-      } else {
-        video.muted = true;
         video
           .play()
           .then(() => setIsPlaying(true))
           .catch(() => setIsPlaying(false));
+      } else {
+        // En computadoras / desktop: intenta reproducir con sonido si no se silenció explícitamente
+        if (!isExplicitlyMuted.current) {
+          video.muted = false;
+          const playPromise = video.play();
+          if (playPromise !== undefined) {
+            playPromise
+              .then(() => {
+                setIsPlaying(true);
+                setIsMuted(false);
+              })
+              .catch(() => {
+                // Si la política del navegador bloquea el audio automático, reproduce en mute
+                video.muted = true;
+                setIsMuted(true);
+                video
+                  .play()
+                  .then(() => setIsPlaying(true))
+                  .catch(() => setIsPlaying(false));
+              });
+          }
+        } else {
+          video.muted = true;
+          video
+            .play()
+            .then(() => setIsPlaying(true))
+            .catch(() => setIsPlaying(false));
+        }
       }
     } else {
-      // User scrolled out of the section: stop video and audio
+      // Al salir de la sección: pausar video y sonido
       video.pause();
       setIsPlaying(false);
     }
-  }, [isInView]);
+  }, [isInView, isMobile]);
 
-  // If autoplay was muted due to browser policy, unmute on first document interaction if still in view
+  // En computadoras: si el autoplay con audio fue bloqueado por el navegador, desmutear al interactuar
   useEffect(() => {
+    if (isMobile) return; // En celulares no se auto-desmutea, requiere clic en el botón de volumen
+
     const handleFirstInteraction = () => {
       const video = videoRef.current;
       if (!video) return;
@@ -101,7 +137,7 @@ export function Experience() {
       window.removeEventListener('click', handleFirstInteraction);
       window.removeEventListener('touchstart', handleFirstInteraction);
     };
-  }, [isInView]);
+  }, [isInView, isMobile]);
 
   const toggleSound = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -111,6 +147,7 @@ export function Experience() {
     if (video.muted) {
       video.muted = false;
       isExplicitlyMuted.current = false;
+      isUserUnmutedOnMobile.current = true;
       setIsMuted(false);
       if (video.paused) {
         video.play().then(() => setIsPlaying(true)).catch(() => {});
@@ -118,6 +155,7 @@ export function Experience() {
     } else {
       video.muted = true;
       isExplicitlyMuted.current = true;
+      isUserUnmutedOnMobile.current = false;
       setIsMuted(true);
     }
   };
@@ -149,6 +187,7 @@ export function Experience() {
                 src="/images/video1.mp4"
                 playsInline
                 loop
+                muted={isMuted}
                 preload="auto"
                 className="w-full h-full object-cover select-none"
               />
@@ -168,20 +207,20 @@ export function Experience() {
               {/* Luxury Audio Toggle Button */}
               <button
                 onClick={toggleSound}
-                className="absolute bottom-6 right-6 z-20 flex items-center gap-2 px-3.5 py-2 rounded-full glass-dark border border-champagne/40 text-ivory text-xs tracking-wider uppercase transition-all duration-300 hover:border-champagne hover:scale-105 shadow-xl group/btn cursor-pointer"
+                className="absolute bottom-5 sm:bottom-6 right-5 sm:right-6 z-20 flex items-center gap-2 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full glass-dark border border-champagne/50 text-ivory text-xs tracking-wider uppercase transition-all duration-300 hover:border-champagne hover:scale-105 active:scale-95 shadow-xl group/btn cursor-pointer"
                 aria-label={isMuted ? 'Activar sonido' : 'Silenciar sonido'}
               >
                 {isMuted ? (
                   <>
                     <VolumeX className="w-4 h-4 text-champagne group-hover/btn:text-champagne-light transition-colors" />
-                    <span className="hidden sm:inline font-light text-[11px] text-ivory/80 group-hover/btn:text-ivory">
+                    <span className="font-light text-[10px] sm:text-[11px] text-ivory/90 group-hover/btn:text-ivory">
                       Activar audio
                     </span>
                   </>
                 ) : (
                   <>
                     <Volume2 className="w-4 h-4 text-champagne animate-pulse" />
-                    <span className="hidden sm:inline font-light text-[11px] text-ivory/80 group-hover/btn:text-ivory">
+                    <span className="font-light text-[10px] sm:text-[11px] text-ivory/90 group-hover/btn:text-ivory">
                       Audio activado
                     </span>
                   </>
